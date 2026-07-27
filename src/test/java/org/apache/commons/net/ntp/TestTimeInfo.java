@@ -87,7 +87,7 @@ class TestTimeInfo {
         assertEquals(info, other); // fails
         assertEquals(info.hashCode(), other.hashCode());
         other.addComment("another comment");
-        // assertFalse(info.equals(other)); // comments not used for equality
+        // assertNotEquals(info, other); // comments not used for equality
 
         final TimeInfo another = new TimeInfo(packet, returnTime, new ArrayList<>());
         assertEquals(info, another);
