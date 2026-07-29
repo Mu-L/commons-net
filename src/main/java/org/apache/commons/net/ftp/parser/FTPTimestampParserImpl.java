@@ -23,6 +23,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import org.apache.commons.net.ftp.Configurable;
@@ -291,9 +292,14 @@ public class FTPTimestampParserImpl implements FTPTimestampParser, Configurable 
             // all instances of short dates which are +- 6 months from current date.
             // TODO this won't always work for systems that use short dates +0/-12months
             // e.g. if today is Jan 1 2001 and the short date is Feb 29
-            final String year = Integer.toString(now.get(Calendar.YEAR));
+            // now is a clone of the caller's serverTime, which under some default locales (e.g. a Thai Buddhist calendar) is not Gregorian, so read the year
+            // through a Gregorian calendar at the same instant to keep the appended year Gregorian rather than 543 years out.
+            final GregorianCalendar gregorianNow = new GregorianCalendar(now.getTimeZone());
+            gregorianNow.setTimeInMillis(now.getTimeInMillis());
+            final String year = Integer.toString(gregorianNow.get(Calendar.YEAR));
             final String timeStampStrPlusYear = timestampStr + " " + year;
             final SimpleDateFormat hackFormatter = new SimpleDateFormat(recentDateFormat.toPattern() + " yyyy", recentDateFormat.getDateFormatSymbols());
+            hackFormatter.setCalendar(new GregorianCalendar());
             hackFormatter.setLenient(false);
             hackFormatter.setTimeZone(recentDateFormat.getTimeZone());
             final ParsePosition pp = new ParsePosition(0);
@@ -338,6 +344,7 @@ public class FTPTimestampParserImpl implements FTPTimestampParser, Configurable 
             } else {
                 defaultDateFormat = new SimpleDateFormat(format);
             }
+            defaultDateFormat.setCalendar(new GregorianCalendar());
             defaultDateFormat.setLenient(false);
         } else {
             defaultDateFormat = null;
@@ -363,6 +370,7 @@ public class FTPTimestampParserImpl implements FTPTimestampParser, Configurable 
             } else {
                 recentDateFormat = new SimpleDateFormat(format);
             }
+            recentDateFormat.setCalendar(new GregorianCalendar());
             recentDateFormat.setLenient(false);
         } else {
             recentDateFormat = null;

@@ -111,10 +111,10 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl {
         final SimpleDateFormat dateFormat;
         final boolean hasMillis;
         if (timestamp.contains(".")) {
-            dateFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS");
+            dateFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS", Locale.ROOT);
             hasMillis = true;
         } else {
-            dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+            dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.ROOT);
             hasMillis = false;
         }
         final TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");

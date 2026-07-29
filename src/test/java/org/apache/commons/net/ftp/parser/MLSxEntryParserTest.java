@@ -16,9 +16,17 @@
  */
 package org.apache.commons.net.ftp.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPFileEntryParser;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 /**
  */
@@ -66,6 +74,20 @@ class MLSxEntryParserTest extends AbstractFTPParseTest {
     @Override
     protected FTPFile nullFileOrNullDate(final FTPFile f) {
         return f;
+    }
+
+    /**
+     * The RFC 3659 time stamp is a numeric Gregorian date. Parsing it must not depend on the JVM default locale's calendar, which, for example,
+     * a Thai locale is a Buddhist calendar that would read the year 543 years out.
+     */
+    @Test
+    @DefaultLocale(language = "th", country = "TH")
+    void testParseGMTdateTimeWithNonGregorianDefaultLocale() {
+        final Calendar parsed = MLSxEntryParser.parseGMTdateTime("20100313224553");
+        final GregorianCalendar expected = new GregorianCalendar(TimeZone.getTimeZone("GMT"), Locale.ROOT);
+        expected.clear();
+        expected.set(2010, Calendar.MARCH, 13, 22, 45, 53);
+        assertEquals(expected.getTimeInMillis(), parsed.getTimeInMillis());
     }
 
     @Override

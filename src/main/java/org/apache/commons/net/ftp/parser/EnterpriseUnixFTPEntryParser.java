@@ -18,6 +18,7 @@
 package org.apache.commons.net.ftp.parser;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -105,7 +106,7 @@ public class EnterpriseUnixFTPEntryParser extends RegexFTPFileEntryParserImpl {
                 // intentionally do nothing
             }
 
-            final Calendar cal = Calendar.getInstance();
+            final Calendar cal = new GregorianCalendar();
             cal.set(Calendar.MILLISECOND, 0);
             cal.set(Calendar.SECOND, 0);
             cal.set(Calendar.MINUTE, 0);

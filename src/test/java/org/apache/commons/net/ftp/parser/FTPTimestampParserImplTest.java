@@ -32,6 +32,7 @@ import java.util.TimeZone;
 import org.apache.commons.net.ftp.FTPClientConfig;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 /**
  * Test the FTPTimestampParser class.
@@ -269,6 +270,55 @@ java.text.ParseException: Timestamp 'Mar 13 02:33' could not be parsed using a s
         } finally {
             Locale.setDefault(locale);
         }
+    }
+
+    /**
+     * A numeric year from a server listing must be read as a Gregorian year regardless of the JVM default locale. Under a Thai locale the default
+     * SimpleDateFormat calendar is a Buddhist calendar, which would otherwise shift the parsed instant by 543 years.
+     */
+    @Test
+    @DefaultLocale(language = "th", country = "TH")
+    void testParseTimestampWithNonGregorianDefaultLocale() throws ParseException {
+        final FTPTimestampParserImpl parser = new FTPTimestampParserImpl();
+        final FTPClientConfig config = new FTPClientConfig(FTPClientConfig.SYST_UNIX);
+        config.setDefaultDateFormatStr("yyyy-MM-dd HH:mm");
+        config.setRecentDateFormatStr("MMM d HH:mm");
+        config.setServerLanguageCode("en");
+        config.setServerTimeZoneId("GMT");
+        parser.configure(config);
+        final Calendar parsed = parser.parseTimestamp("2010-03-13 22:45", new GregorianCalendar());
+        final GregorianCalendar expected = new GregorianCalendar(TimeZone.getTimeZone("GMT"), Locale.ROOT);
+        expected.clear();
+        expected.set(2010, Calendar.MARCH, 13, 22, 45, 0);
+        assertEquals(expected.getTimeInMillis(), parsed.getTimeInMillis());
+    }
+
+    /**
+     * A recent (short) date carries no year, so the parser appends the year taken from the supplied server time. When a caller builds that server time via
+     * {@link Calendar#getInstance()} under a Thai default locale it is a Buddhist calendar, so the appended year must be read through a Gregorian calendar or
+     * the parsed instant lands 543 years out.
+     */
+    @Test
+    @DefaultLocale(language = "th", country = "TH")
+    void testParseRecentTimestampWithNonGregorianDefaultLocale() throws ParseException {
+        final FTPTimestampParserImpl parser = new FTPTimestampParserImpl();
+        final FTPClientConfig config = new FTPClientConfig(FTPClientConfig.SYST_UNIX);
+        config.setDefaultDateFormatStr("yyyy-MM-dd HH:mm");
+        config.setRecentDateFormatStr("MMM d HH:mm");
+        config.setServerLanguageCode("en");
+        config.setServerTimeZoneId("GMT");
+        parser.configure(config);
+        // Calendar.getInstance() under a Thai default locale is a Buddhist calendar, mirroring how a caller builds the server time.
+        final Calendar serverTime = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        final GregorianCalendar serverInstant = new GregorianCalendar(TimeZone.getTimeZone("GMT"), Locale.ROOT);
+        serverInstant.clear();
+        serverInstant.set(2010, Calendar.JUNE, 1, 0, 0, 0);
+        serverTime.setTimeInMillis(serverInstant.getTimeInMillis());
+        final Calendar parsed = parser.parseTimestamp("Mar 13 22:45", serverTime);
+        final GregorianCalendar expected = new GregorianCalendar(TimeZone.getTimeZone("GMT"), Locale.ROOT);
+        expected.clear();
+        expected.set(2010, Calendar.MARCH, 13, 22, 45, 0);
+        assertEquals(expected.getTimeInMillis(), parsed.getTimeInMillis());
     }
 
     @Test
