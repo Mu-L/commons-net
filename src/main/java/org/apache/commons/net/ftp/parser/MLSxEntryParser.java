@@ -106,7 +106,7 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl {
     }
 
     /**
-     * Parse a GMT time stamp of the form yyyyMMDDHHMMSS[.sss]
+     * Parses a GMT time stamp of the form yyyyMMDDHHMMSS[.sss]
      *
      * @param timestamp The date-time to parse
      * @return A Calendar entry, may be {@code null}
@@ -140,7 +140,7 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl {
     }
 
     /**
-     * Parse a GMT time stamp of the form yyyyMMDDHHMMSS[.sss]
+     * Parses a GMT time stamp of the form yyyyMMDDHHMMSS[.sss]
      *
      * @param timestamp The date-time to parse
      * @return A Calendar entry, may be {@code null}
