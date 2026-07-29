@@ -354,7 +354,7 @@ public class FTPFile implements Serializable {
      * @param access     The access group (one of the {@code _ACCESS} constants)
      * @param permission The access permission (one of the {@code _PERMISSION} constants)
      * @param value      {@code true} if permission is allowed, {@code false} if not.
-     * @throws ArrayIndexOutOfBoundsException if either of the parameters is out of range
+     * @throws ArrayIndexOutOfBoundsException if either of the parameters is out of range.
      */
     public void setPermission(final int access, final int permission, final boolean value) {
         // TODO: only allow permission setting if file is valid
@@ -404,6 +404,19 @@ public class FTPFile implements Serializable {
      */
     public void setUser(final String user) {
         this.user = user;
+    }
+
+    /**
+     * Sets if the given access group (one of the {@code _ACCESS} constants) has the given access permission (one of the {@code _PERMISSION}
+     * constants) to the file.
+     *
+     * @param permission The access permission (one of the {@code _PERMISSION} constants)
+     * @param value      {@code true} if permission is allowed, {@code false} if not.
+     * @throws ArrayIndexOutOfBoundsException if either of the parameters is out of range.
+     * @since 3.14.0
+     */
+    public void setUserPermission(final int permission, final boolean value) {
+        setPermission(USER_ACCESS, permission, value);
     }
 
     /**

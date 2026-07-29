@@ -66,6 +66,13 @@ class FTPFileTest {
     }
 
     @Test
+    void testHasPermissionFalse2() {
+        final FTPFile file = new FTPFile();
+        file.setUserPermission(FTPFile.WRITE_PERMISSION, false);
+        assertFalse(file.hasPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION));
+    }
+
+    @Test
     void testHasPermissionInvalidFile() {
         final FTPFile invalidFile = new FTPFile("LIST");
         assertFalse(invalidFile.hasPermission(FTPFile.GROUP_ACCESS, FTPFile.EXECUTE_PERMISSION));
@@ -75,6 +82,13 @@ class FTPFileTest {
     void testHasPermissionTrue() {
         final FTPFile file = new FTPFile();
         file.setPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION, true);
+        assertTrue(file.hasPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION));
+    }
+
+    @Test
+    void testHasPermissionTrue2() {
+        final FTPFile file = new FTPFile();
+        file.setUserPermission(FTPFile.READ_PERMISSION, true);
         assertTrue(file.hasPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION));
     }
 
@@ -152,6 +166,31 @@ class FTPFileTest {
         file.setPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION, true);
         file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
         file.setPermission(FTPFile.USER_ACCESS, FTPFile.EXECUTE_PERMISSION, true);
+        final String formattedString = file.toFormattedString("GMT");
+        assertTrue(formattedString.startsWith("-"));
+        assertTrue(formattedString.startsWith("rwx", 1));
+        assertTrue(formattedString.contains(file.getUser()));
+        assertTrue(formattedString.contains(file.getGroup()));
+        assertTrue(formattedString.contains(String.valueOf(file.getSize())));
+        assertTrue(formattedString.contains("1969-07-16 13:32:00"));
+        assertTrue(formattedString.contains("GMT"));
+        assertTrue(formattedString.contains(file.getName()));
+    }
+
+    @Test
+    void testToFormattedStringWithTimezone2() {
+        final FTPFile file = new FTPFile();
+        file.setType(FTPFile.FILE_TYPE);
+        file.setSize(32767);
+        file.setUser("Apache");
+        file.setGroup("Apache Group");
+        file.setName("virus.bat");
+        final Calendar timestamp = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        timestamp.set(1969, Calendar.JULY, 16, 13, 32, 0);
+        file.setTimestamp(timestamp);
+        file.setUserPermission(FTPFile.READ_PERMISSION, true);
+        file.setUserPermission(FTPFile.WRITE_PERMISSION, true);
+        file.setUserPermission(FTPFile.EXECUTE_PERMISSION, true);
         final String formattedString = file.toFormattedString("GMT");
         assertTrue(formattedString.startsWith("-"));
         assertTrue(formattedString.startsWith("rwx", 1));
