@@ -40,7 +40,7 @@ jobs:
     strategy:
       max-parallel: 20
       matrix:
-        java: [ 8, 11, 17, 21, 25 ]
+        java: [ 8, 11, 17, 21, 25, 26 ]
         os: [ubuntu-latest]
         experimental: [false]
         # Don't need to run all javas on all OSes
@@ -57,7 +57,11 @@ jobs:
             experimental: false
             deploy: true
           # Experimental build
-          - java: 26-ea
+          - java: 27-ea
+            experimental: true        
+            os: ubuntu-latest
+          # Experimental build
+          - java: 28-ea
             experimental: true        
             os: ubuntu-latest
 
