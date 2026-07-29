@@ -59,6 +59,11 @@ import org.apache.commons.net.ftp.FTPFileEntryParserImpl;
  * @since 3.0
  */
 public class MLSxEntryParser extends FTPFileEntryParserImpl {
+
+    private static final String SDF_PATTERN = "yyyyMMddHHmmss";
+
+    private static final String SDF_PATTERN_SECS = SDF_PATTERN + ".SSS";
+
     // This class is immutable, so a single instance can be shared.
     private static final MLSxEntryParser INSTANCE = new MLSxEntryParser();
 
@@ -111,10 +116,10 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl {
         final SimpleDateFormat dateFormat;
         final boolean hasMillis;
         if (timestamp.contains(".")) {
-            dateFormat = new SimpleDateFormat("yyyyMMddHHmmss.SSS", Locale.ROOT);
+            dateFormat = new SimpleDateFormat(SDF_PATTERN_SECS, Locale.ROOT);
             hasMillis = true;
         } else {
-            dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.ROOT);
+            dateFormat = new SimpleDateFormat(SDF_PATTERN, Locale.ROOT);
             hasMillis = false;
         }
         final TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
