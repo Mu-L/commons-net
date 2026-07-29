@@ -168,15 +168,15 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl {
             // TODO these are mostly just guesses at present
             switch (c) {
             case 'a': // (file) may APPEnd
-                file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
-                break;
             case 'c': // (dir) files may be created in the dir
-                file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
-                break;
             case 'd': // deletable
+            case 'm': // (dir) can create directory here
+            case 'p': // (dir) entries may be deleted
+            case 'w': // (files) file may be STORed
                 file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
                 break;
             case 'e': // (dir) can change to this dir
+            case 'r': // (files) file may be RETRieved
                 file.setPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION, true);
                 break;
             case 'f': // (file) renamable
@@ -184,18 +184,6 @@ public class MLSxEntryParser extends FTPFileEntryParserImpl {
                 break;
             case 'l': // (dir) can be listed
                 file.setPermission(FTPFile.USER_ACCESS, FTPFile.EXECUTE_PERMISSION, true);
-                break;
-            case 'm': // (dir) can create directory here
-                file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
-                break;
-            case 'p': // (dir) entries may be deleted
-                file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
-                break;
-            case 'r': // (files) file may be RETRieved
-                file.setPermission(FTPFile.USER_ACCESS, FTPFile.READ_PERMISSION, true);
-                break;
-            case 'w': // (files) file may be STORed
-                file.setPermission(FTPFile.USER_ACCESS, FTPFile.WRITE_PERMISSION, true);
                 break;
             default:
                 break;
