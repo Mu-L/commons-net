@@ -479,7 +479,7 @@ public class TFTPServer implements Runnable, AutoCloseable {
      * @param mode                 A value as specified above.
      * @param log                  Stream to write log message to. If not provided, uses System.out
      * @param errorLog             Stream to write error messages to. If not provided, uses System.err.
-     * @throws IOException if the server directory is invalid or does not exist.
+     * @throws IOException Thrown if the server directory is invalid or does not exist.
      */
     public TFTPServer(final File serverReadDirectory, final File serverWriteDirectory, final int port, final InetAddress localAddress, final ServerMode mode,
             final PrintStream log, final PrintStream errorLog) throws IOException {
@@ -507,7 +507,7 @@ public class TFTPServer implements Runnable, AutoCloseable {
      * @param mode                 A value as specified above.
      * @param log                  Stream to write log message to. If not provided, uses System.out
      * @param errorLog             Stream to write error messages to. If not provided, uses System.err.
-     * @throws IOException if the server directory is invalid or does not exist.
+     * @throws IOException Thrown if the server directory is invalid or does not exist.
      */
     public TFTPServer(final File serverReadDirectory, final File serverWriteDirectory, final int port, final NetworkInterface localiface, final ServerMode mode,
             final PrintStream log, final PrintStream errorLog) throws IOException {
@@ -541,7 +541,7 @@ public class TFTPServer implements Runnable, AutoCloseable {
      * @param mode                 A value as specified above.
      * @param log                  Stream to write log message to. If not provided, uses System.out
      * @param errorLog             Stream to write error messages to. If not provided, uses System.err.
-     * @throws IOException if the server directory is invalid or does not exist.
+     * @throws IOException Thrown if the server directory is invalid or does not exist.
      */
     public TFTPServer(final File serverReadDirectory, final File serverWriteDirectory, final int port, final ServerMode mode, final PrintStream log,
             final PrintStream errorLog) throws IOException {
@@ -565,7 +565,7 @@ public class TFTPServer implements Runnable, AutoCloseable {
      * @param serverReadDirectory  directory for GET requests
      * @param serverWriteDirectory directory for PUT requests
      * @param mode                 A value as specified above.
-     * @throws IOException if the server directory is invalid or does not exist.
+     * @throws IOException Thrown if the server directory is invalid or does not exist.
      */
     public TFTPServer(final File serverReadDirectory, final File serverWriteDirectory, final ServerMode mode) throws IOException {
         this(serverReadDirectory, serverWriteDirectory, DEFAULT_TFTP_PORT, mode, null, null);

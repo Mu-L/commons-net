@@ -51,7 +51,7 @@ public class DiscardUDPClient extends DatagramSocketClient {
      * @param data The buffer to send
      * @param host The target host
      * @see #send(byte[], int, InetAddress, int)
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public void send(final byte[] data, final InetAddress host) throws IOException {
         send(data, data.length, host, DEFAULT_PORT);
@@ -64,7 +64,7 @@ public class DiscardUDPClient extends DatagramSocketClient {
      * @param length The length of the data in the buffer
      * @param host   The target host
      * @see #send(byte[], int, InetAddress, int)
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public void send(final byte[] data, final int length, final InetAddress host) throws IOException {
         send(data, length, host, DEFAULT_PORT);

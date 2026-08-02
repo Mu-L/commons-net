@@ -953,7 +953,7 @@ public class FTPSClient extends FTPClient {
      * @param command The FTP command.
      * @return server reply.
      * @throws IOException  If an I/O error occurs while sending the command.
-     * @throws SSLException if a CCC command fails
+     * @throws SSLException Thrown if a CCC command fails
      * @see org.apache.commons.net.ftp.FTP#sendCommand(String)
      */
     // Would like to remove this method, but that will break any existing clients that are using CCC

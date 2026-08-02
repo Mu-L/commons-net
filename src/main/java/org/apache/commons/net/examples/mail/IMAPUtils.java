@@ -36,7 +36,7 @@ final class IMAPUtils {
      * @param defaultTimeout initial timeout (in milliseconds)
      * @param listener       for tracing protocol IO (may be null)
      * @return The IMAP client - connected and logged in
-     * @throws IOException if any problems occur
+     * @throws IOException Thrown if any problems occur
      */
     static IMAPClient imapLogin(final URI uri, final int defaultTimeout, final ProtocolCommandListener listener) throws IOException {
         final String userInfo = uri.getUserInfo();

@@ -98,7 +98,7 @@ public final class IMAPReply {
      *
      * @param line The tagged line to be checked
      * @return {@link #OK} or {@link #NO} or {@link #BAD} or {@link #CONT}
-     * @throws IOException if the input has an unexpected format
+     * @throws IOException Thrown if the input has an unexpected format
      */
     public static int getReplyCode(final String line) throws IOException {
         return getReplyCode(line, TAGGED_PATTERN);
@@ -131,7 +131,7 @@ public final class IMAPReply {
      *
      * @param line The untagged line to be checked
      * @return {@link #OK} or {@link #NO} or {@link #BAD} or {@link #CONT}
-     * @throws IOException if the input has an unexpected format
+     * @throws IOException Thrown if the input has an unexpected format
      */
     public static int getUntaggedReplyCode(final String line) throws IOException {
         return getReplyCode(line, UNTAGGED_PATTERN);

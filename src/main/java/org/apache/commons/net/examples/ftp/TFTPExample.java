@@ -75,7 +75,7 @@ public final class TFTPExample {
      * Runs this application.
      *
      * @param args command line arguments.
-     * @throws IOException if a network or I/O error occurs.
+     * @throws IOException Thrown if a network or I/O error occurs.
      */
     public static void main(final String[] args) throws IOException {
         boolean receiveFile = true;

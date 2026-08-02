@@ -196,7 +196,7 @@ public class TFTP extends DatagramSocketClient {
      * This method synchronizes a connection by discarding all packets that may be in the local socket buffer. This method need only be called when you
      * implement your own TFTP client or server.
      *
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     public final void discardPackets() throws IOException {
         final DatagramPacket datagram = new DatagramPacket(new byte[packetSize], packetSize);

@@ -1659,7 +1659,7 @@ public class FTPClient extends FTP implements Configurable {
      *
      * @param path The file path to query.
      * @return A string representing the last file modification time in {@code yyyyMMDDhhmmss} format.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 2.0
      */
     public String getModificationTime(final String path) throws IOException {
@@ -2502,7 +2502,7 @@ public class FTPClient extends FTP implements Configurable {
      *
      * @param path The file path to query.
      * @return A Calendar representing the last file modification time, may be {@code null}. The Calendar timestamp will be null if a parse error occurs.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 3.8.0
      */
     public Calendar mdtmCalendar(final String path) throws IOException {
@@ -2519,7 +2519,7 @@ public class FTPClient extends FTP implements Configurable {
      *
      * @param path The file path to query.
      * @return A FTPFile representing the last file modification time, may be {@code null}. The FTPFile timestamp will be null if a parse error occurs.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 3.4
      */
     public FTPFile mdtmFile(final String path) throws IOException {
@@ -2540,7 +2540,7 @@ public class FTPClient extends FTP implements Configurable {
      *
      * @param path The file path to query.
      * @return An Instant representing the last file modification time, may be {@code null}. The Instant timestamp will be null if a parse error occurs.
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 3.9.0
      */
     public Instant mdtmInstant(final String path) throws IOException {
@@ -3158,7 +3158,7 @@ public class FTPClient extends FTP implements Configurable {
      * @param path    The file path for which last modified time is to be changed.
      * @param timeval The timestamp to set to, in {@code yyyyMMDDhhmmss} format.
      * @return true if successfully set, false if not
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      * @since 2.2
      * @see <a href="https://tools.ietf.org/html/draft-somers-ftp-mfxx-04">https://tools.ietf.org/html/draft-somers-ftp-mfxx-04</a>
      */

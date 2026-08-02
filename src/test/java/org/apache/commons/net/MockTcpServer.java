@@ -66,7 +66,7 @@ public abstract class MockTcpServer implements Runnable, Closeable {
      * Creates new {@link MockTcpServer} that will bind to {@link InetAddress#getLocalHost()}
      * on random port.
      *
-     * @throws IOException if an I/O error occurs when opening the socket.
+     * @throws IOException Thrown if an I/O error occurs when opening the socket.
      */
     protected MockTcpServer() throws IOException {
         this(0);
@@ -77,7 +77,7 @@ public abstract class MockTcpServer implements Runnable, Closeable {
      * on specified port.
      *
      * @param port The port number the server will bind to, or 0 to use a port number that is automatically allocated
-     * @throws IOException if an I/O error occurs when opening the socket.
+     * @throws IOException Thrown if an I/O error occurs when opening the socket.
      */
     protected MockTcpServer(final int port) throws IOException {
         this(port, InetAddress.getLocalHost());
@@ -88,7 +88,7 @@ public abstract class MockTcpServer implements Runnable, Closeable {
      *
      * @param port The port number the server will bind to, or 0 to use a port number that is automatically allocated
      * @param serverAddress The InetAddress the server will bind to
-     * @throws IOException if an I/O error occurs when opening the socket.
+     * @throws IOException Thrown if an I/O error occurs when opening the socket.
      */
     protected MockTcpServer(final int port, final InetAddress serverAddress) throws IOException {
         this.serverAddress = serverAddress;

@@ -264,7 +264,7 @@ public class NNTPClient extends NNTP {
      * @param lowArticleNumber  low
      * @param highArticleNumber high
      * @return An Iterable of Articles
-     * @throws IOException if the command failed
+     * @throws IOException Thrown if the command failed
      * @since 3.0
      */
     public Iterable<Article> iterateArticleInfo(final long lowArticleNumber, final long highArticleNumber) throws IOException {
@@ -636,7 +636,7 @@ public class NNTPClient extends NNTP {
      * Same as {@code retrieveArticle((String) null)} Note: the return can be cast to a {@link BufferedReader}
      *
      * @return A DotTerminatedMessageReader instance from which the article can be read. null if the article does not exist.
-     * @throws IOException if an IO error occurs
+     * @throws IOException Thrown if an IO error occurs
      */
     public Reader retrieveArticle() throws IOException {
         return retrieveArticle((String) null);
@@ -673,7 +673,7 @@ public class NNTPClient extends NNTP {
      *
      * @param articleNumber The article number to fetch
      * @return A DotTerminatedMessageReader instance from which the article can be read. null if the article does not exist.
-     * @throws IOException if an IO error occurs
+     * @throws IOException Thrown if an IO error occurs
      */
     public BufferedReader retrieveArticle(final long articleNumber) throws IOException {
         return retrieveArticle(articleNumber, null);
@@ -712,7 +712,7 @@ public class NNTPClient extends NNTP {
      *
      * @param articleId The article id to retrieve
      * @return A DotTerminatedMessageReader instance from which the article can be read. null if the article does not exist.
-     * @throws IOException if an IO error occurs
+     * @throws IOException Thrown if an IO error occurs
      */
     public Reader retrieveArticle(final String articleId) throws IOException {
         return retrieveArticle(articleId, (ArticleInfo) null);
@@ -766,7 +766,7 @@ public class NNTPClient extends NNTP {
      * Same as {@code retrieveArticleBody(null)} Note: the return can be cast to a {@link BufferedReader}
      *
      * @return A DotTerminatedMessageReader instance from which the article body can be read. null if the article does not exist.
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public Reader retrieveArticleBody() throws IOException {
         return retrieveArticleBody(null);
@@ -803,7 +803,7 @@ public class NNTPClient extends NNTP {
      *
      * @param articleNumber The article number
      * @return The reader
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public BufferedReader retrieveArticleBody(final long articleNumber) throws IOException {
         return retrieveArticleBody(articleNumber, null);
@@ -842,7 +842,7 @@ public class NNTPClient extends NNTP {
      *
      * @param articleId The article id
      * @return A DotTerminatedMessageReader instance from which the article body can be read. null if the article does not exist.
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public Reader retrieveArticleBody(final String articleId) throws IOException {
         return retrieveArticleBody(articleId, (ArticleInfo) null);
@@ -897,7 +897,7 @@ public class NNTPClient extends NNTP {
      * Same as {@code retrieveArticleHeader((String) null)} Note: the return can be cast to a {@link BufferedReader}
      *
      * @return The reader
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public Reader retrieveArticleHeader() throws IOException {
         return retrieveArticleHeader((String) null);
@@ -934,7 +934,7 @@ public class NNTPClient extends NNTP {
      *
      * @param articleNumber The article number
      * @return The reader
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public BufferedReader retrieveArticleHeader(final long articleNumber) throws IOException {
         return retrieveArticleHeader(articleNumber, null);
@@ -973,7 +973,7 @@ public class NNTPClient extends NNTP {
      *
      * @param articleId The article id to fetch
      * @return The reader
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public Reader retrieveArticleHeader(final String articleId) throws IOException {
         return retrieveArticleHeader(articleId, (ArticleInfo) null);
@@ -1310,7 +1310,7 @@ public class NNTPClient extends NNTP {
      *
      * @param newsgroup The newsgroup name
      * @return true if newsgroup exist and was selected
-     * @throws IOException if an error occurs
+     * @throws IOException Thrown if an error occurs
      */
     public boolean selectNewsgroup(final String newsgroup) throws IOException {
         return selectNewsgroup(newsgroup, null);

@@ -81,7 +81,7 @@ public class SimpleNTPServer implements Runnable {
     /**
      * Connects to server socket and listen for client connections.
      *
-     * @throws IOException if an I/O error occurs when creating the socket.
+     * @throws IOException Thrown if an I/O error occurs when creating the socket.
      */
     public void connect() throws IOException {
         if (socket == null) {
@@ -103,7 +103,7 @@ public class SimpleNTPServer implements Runnable {
      *
      * @param request incoming DatagramPacket
      * @param rcvTime time packet received
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException Thrown if an I/O error occurs.
      */
     protected void handlePacket(final DatagramPacket request, final long rcvTime) throws IOException {
         final NtpV3Packet message = new NtpV3Impl();
@@ -181,7 +181,7 @@ public class SimpleNTPServer implements Runnable {
     /**
      * Starts time service and provide time to client connections.
      *
-     * @throws IOException if an I/O error occurs when creating the socket.
+     * @throws IOException Thrown if an I/O error occurs when creating the socket.
      */
     public void start() throws IOException {
         if (socket == null) {

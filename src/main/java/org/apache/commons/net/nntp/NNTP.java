@@ -464,7 +464,7 @@ public class NNTP extends SocketClient {
      *
      * @param wildmat A wildmat (pseudo-regex) pattern. See RFC 2980 for details.
      * @return The reply code received from the server.
-     * @throws IOException if the command fails
+     * @throws IOException Thrown if the command fails
      */
     public int listActive(final String wildmat) throws IOException {
         final StringBuilder command = new StringBuilder("ACTIVE ");
