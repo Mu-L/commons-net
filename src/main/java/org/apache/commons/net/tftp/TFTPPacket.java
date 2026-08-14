@@ -111,7 +111,7 @@ public abstract class TFTPPacket {
             packet = new TFTPErrorPacket(datagram);
             break;
         default:
-            throw new TFTPPacketException("Bad packet.  Invalid TFTP operator code.");
+            throw new TFTPPacketException("Bad packet. Invalid TFTP operator code.");
         }
         return packet;
     }
@@ -136,6 +136,12 @@ public abstract class TFTPPacket {
         this.type = type;
         this.address = address;
         this.port = port;
+    }
+
+    void checkType(final byte[] data) throws TFTPPacketException {
+        if (getType() != data[1]) {
+            throw new TFTPPacketException("TFTP operator code does not match type.");
+        }
     }
 
     /**
